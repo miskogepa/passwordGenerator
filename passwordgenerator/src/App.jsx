@@ -43,6 +43,27 @@ function App() {
           />
           <label htmlFor="lenght">Lenght {length}</label>
         </div>
+        <div className="flex items-center gap-x-1 ">
+          <input
+            type="checkbox"
+            defaultChecked={numberAllowed}
+            onChange={() => {
+              setNumberAllowed((prev) => !prev); // toggle brojevi
+            }}
+          />
+          <label htmlFor="number">Numbers</label>
+        </div>
+
+        <div className="flex items-center gap-x-1 ">
+          <input
+            type="checkbox"
+            defaultChecked={charAllowed}
+            onChange={() => {
+              setCharAllowed((prev) => !prev); // toggle brojevi
+            }}
+          />
+          <label htmlFor="charInput">Character</label>
+        </div>
       </div>
     </div>
   );
