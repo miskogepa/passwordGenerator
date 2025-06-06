@@ -9,6 +9,7 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false); // da li su brojevi dozvoljeni
   const [charAllowed, setCharAllowed] = useState(false); // da li su specijalni karakteri dozvoljeni
   const [password, setPassword] = useState(""); // generisana lozinka
+  const [copied, setCopied] = useState(false); // dodajemo state za poruku
 
   const passwordRef = useRef(null); // referenca na input polje za lozinku
 
@@ -36,8 +37,9 @@ function App() {
 
   const copyToClipboard = () => {
     window.navigator.clipboard.writeText(password);
-    passwordRef.current.select(); // selektujemo input polje tj. password kako bi korisnik mogao da vidi da je lozinka kopirana
-   // alert("Password copied to clipboard!"); // obaveštavamo korisnika da je lozinka kopirana
+    passwordRef.current.select();
+    setCopied(true); // prikazujemo poruku
+    setTimeout(() => setCopied(false), 2000); // sakrivamo poruku posle 2 sekunde
   }; // kopiramo lozinku u clipboard
 
   return (
@@ -101,6 +103,10 @@ function App() {
           />
           <label htmlFor="charInput">Character</label>
         </div>
+      </div>
+
+      <div className="flex justify-center items-center max-w-md w-full mx-auto mt-2.5">
+        {copied && <h1 className="text-orange-500">Password copied!</h1>}
       </div>
     </div>
   );
