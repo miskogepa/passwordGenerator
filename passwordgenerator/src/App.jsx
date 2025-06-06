@@ -32,6 +32,10 @@ function App() {
     // kada se promeni length, numberAllowed ili charAllowed, generišemo novu lozinku
   }, [length, numberAllowed, charAllowed]);
 
+  const copyToClipboard = () => {
+    window.navigator.clipboard.writeText(password);
+  }; // kopiramo lozinku u clipboard
+
   return (
     <div
       id="container"
@@ -48,7 +52,10 @@ function App() {
           placeholder="password"
           readOnly
         />
-        <button className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0">
+        <button
+          onClick={copyToClipboard}
+          className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0 hover:cursor-pointer active:bg-orange-500 transition-colors duration-100"
+        >
           {" "}
           copy
         </button>
