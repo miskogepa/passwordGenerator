@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -10,11 +10,27 @@ function App() {
   const [charAllowed, setCharAllowed] = useState(false); // da li su specijalni karakteri dozvoljeni
   const [password, setPassword] = useState(""); // generisana lozinka
 
+  const generatePassword = useCallback(() => {
+    let pass = "";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-  
+    if (numberAllowed) str += "0123456789"; // dodajemo brojeve ako su dozvoljeni
+    if (charAllowed) str += "!@#$%^&*()_+[]{}|;:,.<>?"; // dodajemo specijalne karaktere ako su dozvoljeni
+
+    for (let i = 1; i < length; i++) {
+      const char = Math.floor(Math.random() * str.length + 1); // generišemo nasumičan indeks
+      pass += str.charAt(char); // dodajemo karakter na lozinku
+    }
+
+    setPassword(pass); // postavljamo generisanu lozinku
+  }, [length, numberAllowed, charAllowed]);
+  //[length, numberAllowed, charAllowed] su zavisnosti koje se koriste u generisanju lozinke
 
   return (
-    <div id="container" className="mt-40 w-full h-[180px] max-w-md mx-auto shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500">
+    <div
+      id="container"
+      className="mt-40 w-full h-[180px] max-w-md mx-auto shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500"
+    >
       <h1 className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500">
         Password generator
       </h1>
