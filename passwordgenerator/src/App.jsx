@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -17,14 +17,20 @@ function App() {
     if (numberAllowed) str += "0123456789"; // dodajemo brojeve ako su dozvoljeni
     if (charAllowed) str += "!@#$%^&*()_+[]{}|;:,.<>?"; // dodajemo specijalne karaktere ako su dozvoljeni
 
-    for (let i = 1; i < length; i++) {
-      const char = Math.floor(Math.random() * str.length + 1); // generišemo nasumičan indeks
+    for (let i = 0; i < length; i++) {
+      const char = Math.floor(Math.random() * str.length); // generišemo nasumičan indeks
       pass += str.charAt(char); // dodajemo karakter na lozinku
     }
 
     setPassword(pass); // postavljamo generisanu lozinku
   }, [length, numberAllowed, charAllowed]);
   //[length, numberAllowed, charAllowed] su zavisnosti koje se koriste u generisanju lozinke
+
+  //dodali smo UseEffect da se lozinka generiše svaki put kada se promeni neka od zavisnosti
+  useEffect(() => {
+    generatePassword();
+    // kada se promeni length, numberAllowed ili charAllowed, generišemo novu lozinku
+  }, [length, numberAllowed, charAllowed]);
 
   return (
     <div
