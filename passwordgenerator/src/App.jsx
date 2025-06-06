@@ -11,7 +11,7 @@ function App() {
   const [password, setPassword] = useState(""); // generisana lozinka
 
   return (
-    <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500">
+    <div id="container" className="mt-40 w-full h-[300px] max-w-md mx-auto shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500">
       <h1 className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 bg-gray-800 text-orange-500">
         Password generator
       </h1>
