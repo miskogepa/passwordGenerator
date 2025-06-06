@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -9,6 +9,8 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false); // da li su brojevi dozvoljeni
   const [charAllowed, setCharAllowed] = useState(false); // da li su specijalni karakteri dozvoljeni
   const [password, setPassword] = useState(""); // generisana lozinka
+
+  const passwordRef = useRef(null); // referenca na input polje za lozinku
 
   const generatePassword = useCallback(() => {
     let pass = "";
@@ -34,6 +36,8 @@ function App() {
 
   const copyToClipboard = () => {
     window.navigator.clipboard.writeText(password);
+    passwordRef.current.select(); // selektujemo input polje tj. password kako bi korisnik mogao da vidi da je lozinka kopirana
+   // alert("Password copied to clipboard!"); // obaveštavamo korisnika da je lozinka kopirana
   }; // kopiramo lozinku u clipboard
 
   return (
@@ -51,6 +55,7 @@ function App() {
           className="outline-none w-full px-4 py-2"
           placeholder="password"
           readOnly
+          ref={passwordRef} // referenca na input polje
         />
         <button
           onClick={copyToClipboard}
