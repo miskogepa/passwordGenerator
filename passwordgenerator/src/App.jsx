@@ -28,6 +28,7 @@ function App() {
     setPassword(pass); // postavljamo generisanu lozinku
   }, [length, numberAllowed, charAllowed]);
   //[length, numberAllowed, charAllowed] su zavisnosti koje se koriste u generisanju lozinke
+  //ovde je useCallback da se funkcija ne kreira iznova pri svakom renderovanju, već samo kada se promeni neka od zavisnosti
 
   //dodali smo UseEffect da se lozinka generiše svaki put kada se promeni neka od zavisnosti
   useEffect(() => {
